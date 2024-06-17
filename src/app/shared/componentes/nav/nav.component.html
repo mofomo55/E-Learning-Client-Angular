@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand me-2  d-flex align-items-center" href="#">
+      <img
+         src="assets/learning-logo-png1.png"
+        height="50px"
+        width="70px"
+        alt=""
+        loading="lazy"
+        style=" margin-right: 30px; "
+      />
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link " aria-current="page" href="/Dashboard"><i class="fa fa-home fa-lg"></i> Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/Profile"><i class="fa fa-user fa-lg"></i>  Profile</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link " aria-current="page" href="/Messages"><i class="fa fa-comments fa-lg"></i>  Messages</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link " aria-current="page" href="/Library"><i class="fa fa-book fa-lg"></i>  Library</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link " aria-current="page" href="" (click)="logout()"><i class="fa fa-arrow-right from-bracket fa-lg"></i>  logout</a>
+        </li>
+      </ul>
+
+      <form class="d-flex" role="userLoggined">
+        <span class="fw-bolder" style="margin-top: 17px; margin-right: 20px; ">{{userName}}</span>
+        <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="#">
+          <img
+            src="assets/Avatar/User.png"
+            height="50px"
+            width="50px"
+            alt=""
+            loading="lazy"
+            style="margin-right: 20px; "
+          />
+        </a>
+
+      </form>
+    </div>
+  </div>
+</nav>
+

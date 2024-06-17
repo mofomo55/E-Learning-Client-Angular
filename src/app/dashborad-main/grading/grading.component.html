@@ -1,0 +1,85 @@
+<div class="row">
+
+
+  <div class="col-md-12 col-sm-12" >
+
+
+<form >
+<!-- <div class="mb-3">
+  <label for="Title" class="form-label">Title:</label>
+  <input type="text" class="form-control" id="Title" placeholder="New Task">
+</div>
+
+<div class="mb-3">
+  <label for="StartDate" class="form-label">Start Date:</label>
+  <input type="datetime" class="form-control" id="StartDate">
+</div>
+
+<div class="mb-3">
+  <label for="EndDate" class="form-label">End Date:</label>
+  <input type="datetime" class="form-control" id="EndDate">
+</div>
+
+<div class="mb-3">
+  <label for="MaxGrade" class="form-label">Max Grade:</label>
+  <input type="number" class="form-control" id="MaxGrade">
+</div> -->
+<div style="height: 30px; border-radius: 0%;  padding: 0%;" class="alert alert-primary" role="alert" *ngFor="let OneAssigmentitem of OneAssigment">
+  <h5 >{{OneAssigmentitem.title}}</h5>
+   </div>
+<table style="margin-top: 15px;" class="table table-striped rounded-5 border  pt-2 pb-2 ">
+  <thead>
+    <tr>
+      <th scope="col">Student Name:</th>
+      <th scope="col">Grade:</th>
+      <th scope="col">Date:</th>
+      <th scope="col">Action:</th>
+    </tr>
+  </thead>
+  <tbody class="rounded-5" style=" overflow-y: scroll;" >
+    <tr *ngFor="let enrollGrade of EnrollForGrade">
+      <td >{{enrollGrade.student_id.userID.userName}}</td>
+      <td ></td>
+      <td ></td>
+       <td ><button style="margin-left: 10px;" type="button" class="btn btn-success " data-bs-toggle="modal"   data-bs-target="#NewGrade" (click)="setEnrollmentID(enrollGrade.enrollmentsID)"><i style="background:transparent; color:white;" class="fa fa-check fa-duotone fa-bounce fa-lg" ></i>Set Grade</button></td>
+    </tr>
+  </tbody>
+</table>
+
+
+</form>
+
+
+</div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="NewGrade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Adding New Grade</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="Gradeing">
+          <div class="mb-3">
+            <label for="Score" class="col-form-label">Grade :</label>
+            <input type="number" formControlName="Score" class="form-control" id="Score">
+          </div>
+          <div class="mb-3">
+            <label for="GDate" class="col-form-label">Grade Date:</label>
+            <input type="date" formControlName="GraDate" class="form-control" id="GDate">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success" (click)="ConfirmNewGrade()" >Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>

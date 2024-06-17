@@ -1,0 +1,214 @@
+
+
+<div class="row">
+
+
+  <div class="col-md-12 col-sm-12" >
+    <div class="accordion mt-3" id="accordionPanelsStayOpenExample">
+      <div class="accordion-item"  *ngFor="let item of Courses">
+        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+          <button style="font-size: 20px;" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+            {{item.courseName}}  {{item.sub_ID.subjectName}}
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+          <div class=" accordion-body">
+
+            <div style="height: 30px; border-radius: 0%;  padding: 0%;" class="alert alert-primary" role="alert">
+              <h5>Assigments</h5>
+               </div>
+
+            <table class="table table-striped rounded-5 border pt-2 pb-2"  >
+              <thead>
+                <tr>
+                  <th scope="col">Task:</th>
+                  <th scope="col">End Date:</th>
+                  <th scope="col">Max Grad:</th>
+                </tr>
+              </thead>
+              <tbody class="rounded-5" style=" overflow-y: scroll;" *ngFor="let tableItem of AllAssigments">
+                <tr *ngIf="item.courseID == tableItem.course_id.courseID">
+                  <th scope="row" style="font-style: normal;"><a style="text-decoration: none;" href="/Dashboard/CreateAssigment?AssigmentID={{tableItem.assiID}}">{{tableItem.title}}</a></th>
+                  <td >{{tableItem.endDate}}</td>
+                  <td >{{tableItem.max_Grading}}</td>
+                   <td >
+                    <button style="margin-right: 10px;" type="button" class="btn btn-primary mt-0 mb-0"><i style=" background:transparent; color:white;" class="fa fa-pencil fa-duotone fa-bounce fa-lg"></i></button>
+                     <button type="button" class="btn btn-danger mt-0 mb-0"><i style="background:transparent; color:white;" class="fa fa-trash fa-duotone fa-bounce fa-lg"></i></button>
+                    </td>
+                </tr>
+              </tbody>
+              <tfoot class="p-0">
+                <button style="margin-bottom: 20px;  padding: 0; height: 30px; padding-right: 10px;" type="button"  data-bs-toggle="modal"   data-bs-target="#NewTask" class="btn btn-success mt-3 mb-0" (click)="setCourseID(item.courseID)"><i style="background:transparent; color:white;" class="fa fa-plus fa-duotone fa-bounce fa-lg"></i> New Task</button>
+              </tfoot>
+            </table>
+
+
+
+            <div style="height: 30px; border-radius: 0%;  padding: 0%;" class="alert alert-primary" role="alert">
+              <h5>submission</h5>
+               </div>
+
+               <table class="table table-striped rounded-5 border pt-2 pb-2"  >
+                <thead>
+                  <tr>
+                    <th scope="col">Task:</th>
+                    <th scope="col"> Student:</th>
+                    <th scope="col">attchment:</th>
+
+                  </tr>
+                </thead>
+                <tbody class="rounded-5" style=" overflow-y: scroll;" *ngFor="let submission of Submission">
+                  <tr *ngIf="submission.assigment_ID.course_id.courseID == item.courseID">
+                    <th scope="row" style="font-style: normal;">{{submission.assigment_ID.title}}</th>
+                    <td >{{submission.student_ID.userID.userName}}</td>
+                    <td ><a href="{{BaseUrlTeacher}}/{{submission.attachment}}">{{submission.attachment}}</a></td>
+
+                  </tr>
+                </tbody>
+                <tfoot class="p-0">
+                </tfoot>
+              </table>
+
+
+
+
+            <div style="height: 30px; border-radius: 0%;  padding: 0%;" class="alert alert-primary" role="alert">
+           <h5 >Grading</h5>
+            </div>
+            <button style="margin-bottom: 20px;  padding: 0; height: 30px; padding-right: 10px;" type="button"  data-bs-toggle="modal"   data-bs-target="#NewSection"  class="btn btn-success mt-3 mb-0" (click)="setCourseID(item.courseID)"><i style="margin-left: 10px; margin-right: 5px; background:transparent; color:white;" class="fa fa-plus fa-duotone fa-bounce fa-lg"></i> New Section</button>
+            <div *ngFor="let SectionItem of Sections">
+
+            <table style="margin-top: 15px;" class="table table-striped rounded-5 border  pt-2 pb-2"  *ngIf="item.courseID == SectionItem.course_ID.courseID" >
+              <thead>
+                <tr>
+                  <th scope="col">{{SectionItem.title}}</th>
+
+                </tr>
+              </thead>
+              <tbody class="rounded-5" style=" overflow-y: scroll;" *ngFor="let KeysGrades of GradesKey">
+                <tr  *ngIf="SectionItem.sectionsID == KeysGrades.section_ID.sectionsID">
+                  <th scope="row" style="font-style: normal;"><a style="text-decoration: none;" href="/Dashboard/Grading?CourseID={{item.courseID}}&AssigmentID={{KeysGrades.assigment_ID.assiID}}&SectionID={{SectionItem.sectionsID}}">{{KeysGrades.assigment_ID.title}}</a></th>
+                  <td >{{KeysGrades.gDate}}</td>
+                  <td >{{KeysGrades.assigment_ID.max_Grading}}</td>
+                   <td ><button type="button" class="btn btn-danger mt-0 mb-0"><i style="background:transparent; color:white;" class="fa fa-trash fa-duotone fa-bounce fa-lg"></i></button></td>
+                </tr>
+              </tbody>
+              <tfoot class="p-0">
+                <button style="margin-bottom: 20px;  padding: 0; height: 30px; padding-right: 10px;" type="button"  data-bs-toggle="modal"   data-bs-target="#NewGrade" class="btn btn-success mt-3 mb-0" (click)="setSectionID(SectionItem.sectionsID,item.courseID)"><i style="background:transparent; color:white;" class="fa fa-plus fa-duotone fa-bounce fa-lg"></i> New Grade</button>
+              </tfoot>
+            </table>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--------------------------------------------------------------------------->
+
+
+
+ <div class="modal fade" id="NewTask" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Adding New Task</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="AssigmentForm">
+          <div class="mb-3">
+            <label for="Title" class="col-form-label">Title:</label>
+            <input type="text" formControlName="Title" class="form-control" id="Title">
+          </div>
+          <div class="mb-3">
+            <label for="StartDate" class="col-form-label">Start Date:</label>
+            <input type="date" formControlName="StartDate" class="form-control" id="StartDate">
+          </div>
+          <div class="mb-3">
+            <label for="EndDate" class="col-form-label">End Date:</label>
+            <input type="date" formControlName="EndDate" class="form-control" id="EndDate">
+          </div>
+
+          <div class="mb-3">
+            <label for="MaxGrade" class="col-form-label">Max Grade:</label>
+            <input type="number" formControlName="MaxGrade" class="form-control" id="MaxGrade">
+          </div>
+
+          <select #TypeDropDownList class="form-select form-select-lg mb-3" aria-label="Large select example" (change)="selectType()">
+            <option selected value="">Select Type of Assigment</option>
+            <option value="Task">Task</option>
+            <option value="Test">Test</option>
+          </select>
+
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success" (click)="ConfirmNewAssigment()">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="NewSection" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Adding New Task</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="SectionForm">
+          <div class="mb-3">
+            <label for="Title" class="col-form-label">Title:</label>
+            <input type="text" formControlName="Title" class="form-control" id="Title">
+          </div>
+          <div class="mb-3">
+            <label for="Percent" class="col-form-label">Percent:</label>
+            <input type="number" formControlName="Percent" class="form-control" id="Percent">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success" (click)="ConfirmNewSection()">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="NewGrade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Adding New Grade</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="GradeForm">
+          <select #AssigmentDropDownList class="form-select form-select-lg mb-3" aria-label="Large select example" (change)="selectAssigment()">
+            <option selected value="">Select Assignment to Grade it</option>
+            <option *ngFor="let AssigSelect of assigmentSelectList" value="{{AssigSelect.assiID}}">{{AssigSelect.title}}</option>
+          </select>
+          <div class="mb-3">
+            <label for="GDate" class="col-form-label">Grade Date:</label>
+            <input type="date" formControlName="GDate" class="form-control" id="GDate">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success" (click)="ConfirmNewGradeKey()">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>

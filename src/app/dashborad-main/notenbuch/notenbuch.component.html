@@ -1,0 +1,59 @@
+<div class="row">
+
+  <div class="col-md-12 col-sm-12" >
+    <span>Grading</span>
+    <div class="alert alert-light mt-3" role="alert" *ngFor="let Sectionss of Sections">
+
+      <div class="alert alert-secondary mt-3" role="alert"  >
+        <span style="font-weight: bold;">{{Sectionss.title + " (" + Sectionss.percent + "%)"}}</span>
+        <table class="table table-striped rounded-5 mt-2"  >
+          <thead>
+            <tr>
+              <th  scope="col">Title</th>
+              <th  scope="col">Date</th>
+              <th scope="col">Max Point</th>
+              <th  scope="col">Point</th>
+              <th  scope="col">Grade</th>
+            </tr>
+          </thead>
+          <tbody class="rounded-5" style=" overflow-y: scroll;" *ngFor="let GradeBook of GradesBook">
+            <tr *ngIf="GradeBook.section_ID.sectionsID == Sectionss.sectionsID">
+              <th scope="row" >{{GradeBook.assigment_ID.title}}</th>
+              <td >{{GradeBook.grade_ID.gradDate}}</td>
+              <td >
+                <span *ngIf="GradeBook.grade_ID.gradID != '0'" >{{GradeBook.assigment_ID.max_Grading}}</span>
+                <img *ngIf="GradeBook.grade_ID.gradID == '0'" style="margin-left: 30px;" src="assets/Missing.png"  width="50px" height="50px"/>
+              </td>
+              <td >
+                <span *ngIf="GradeBook.grade_ID.gradID != '0'" >{{GradeBook.grade_ID.score}}</span>
+                <img *ngIf="GradeBook.grade_ID.gradID == '0'" style="margin-left: 30px;" src="assets/Missing.png"  width="50px" height="50px"/>
+              </td>
+              <td >
+                <span *ngIf="GradeBook.grade_ID.gradID != '0'" >{{percentCalculateForGrade(GradeBook.assigment_ID.max_Grading,GradeBook.grade_ID.score)}}</span>
+                <img *ngIf="GradeBook.grade_ID.gradID == '0'" style="margin-left: 30px;" src="assets/Missing.png"  width="50px" height="50px"/>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot class="p-0">
+            <tr >
+              <th style="width: 20%;"></th>
+              <th style="width: 20%;"></th>
+              <th style="width: 20%;"><span>{{ CalcutTheMaxScore(Sectionss.sectionsID,Sectionss.percent) }}</span></th>
+              <th style="width: 20%;"><span>{{CalcutTheStudentScore(Sectionss.sectionsID,Sectionss.percent)}}</span></th>
+              <th style="width: 20%;"><span></span></th>
+            </tr>
+
+          </tfoot>
+        </table>
+
+      </div>
+
+
+    </div>
+    <div class="alert alert-secondary" role="alert">
+      End Grade For UserName Is: <span>5</span>
+    </div>
+
+  </div>
+
+</div>

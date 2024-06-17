@@ -1,0 +1,73 @@
+
+<div class="row">
+
+  <div class="col-md-12 col-sm-12" >
+
+    <div class="alert alert-light mt-3" role="alert">
+      <span>Assigments</span>
+      <div class="alert alert-secondary mt-3" role="alert" *ngFor="let Enrollments of StudentEnrollments">
+        <span style="font-weight: bold;">{{Enrollments.course_id.courseName}}</span> <span> {{Enrollments.course_id.sub_ID.subjectName}}</span>
+        <table class="table table-striped rounded-5 mt-2"  >
+          <thead>
+            <tr>
+              <th style="width:33%;" scope="col">End Date</th>
+              <th style="width:33%;" scope="col">Task</th>
+              <th style="width:33%;" scope="col">submission status</th>
+            </tr>
+          </thead>
+          <tbody class="rounded-5" style=" overflow-y: scroll;" *ngFor="let AssigmentItem of AllAssigments">
+            <tr *ngIf="AssigmentItem.course_id.courseID == Enrollments.course_id.courseID">
+              <th scope="row">
+                <span  *ngIf="!isDateInPast(AssigmentItem.endDate)">{{AssigmentItem.endDate}}</span>
+                <span  *ngIf="isDateInPast(AssigmentItem.endDate)">Finished</span>
+              </th>
+              <td  ><a style="text-decoration: none;" href="Dashboard/submission?Assigment={{AssigmentItem.assiID}}">{{AssigmentItem.title}}</a></td>
+              <td >
+
+
+                <img *ngIf="AssigmentItem.submission_Status == '0'" style="margin-left: 30px;" src="assets/Missing.png"  width="50px" height="50px"/>
+                <!-- {{AssigmentItem.submission_Status}} -->
+                <img *ngIf="AssigmentItem.submission_Status == '1'" style="margin-left: 30px;" src="assets/submited.png"  width="50px" height="50px"/>
+
+
+              </td>
+            </tr>
+          </tbody>
+          <tfoot class="p-0">
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="col-md-12 col-sm-12" >
+
+    <div class="alert alert-light mt-3" role="alert">
+      <span>Grading</span>
+      <div class="alert alert-secondary mt-3" role="alert" >
+
+        <table class="table table-striped rounded-5 mt-2"  >
+
+          <tbody class="rounded-5" style=" overflow-y: scroll;" *ngFor="let Enrollments of StudentEnrollments">
+            <tr>
+              <th scope="row"> <a href="Dashboard/Notenbuch?CourseID={{Enrollments.course_id.courseID}}" style="font-weight: bold; text-decoration: none;">{{Enrollments.course_id.courseName}}</a> <a href="Dashboard/Notenbuch?CourseID={{Enrollments.course_id.courseID}}" style="font-weight: bold; text-decoration: none;" > {{Enrollments.course_id.sub_ID.subjectName}}</a></th>
+              <td >5</td>
+            </tr>
+          </tbody>
+          <tfoot class="p-0">
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+
+
+
+</div>
